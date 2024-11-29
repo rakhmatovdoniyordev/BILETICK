@@ -24,7 +24,7 @@ const Header = () => {
           </div>
         </header>
 
-        <div className='fixed bottom-16 right-20'>
+        <div className='fixed bottom-16 right-[10%] z-[101]'>
             <Mode/>
         </div>
     </>
