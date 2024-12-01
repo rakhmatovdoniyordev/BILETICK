@@ -4,3 +4,10 @@
 .gra{
   background: radial-gradient(50.89% 100% at 50.13% 100%, #000000 0%, rgba(0, 0, 0, 0.6) 49.5%, rgba(0, 0, 0, 0) 100%);
 }
+*{
+  scroll-behavior: smooth;
+}
+.category.active{
+  background: rgba(198, 31, 31, 0.397);
+  color: rgba(255, 255, 255, 0.23);
+}

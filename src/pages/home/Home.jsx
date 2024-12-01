@@ -5,7 +5,6 @@ import Week from '../../components/Week/Week';
 
 const Home = () => {
     const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
-    console.log(Mode);
   return (
     <section>
       <Carousel/>
@@ -14,4 +13,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default React.memo(Home)

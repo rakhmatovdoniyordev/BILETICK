@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
+import Detail from '../pages/detail/Detail'
 import Home from '../pages/home/Home'
 import Layout from '../pages/layout/Layout'
 import Search from '../pages/search/Search'
@@ -15,6 +16,7 @@ const Router = () => {
             <Route path='/' element={<Home/>}/>
             <Route path='/sessions' element={<Session/>}/>
             <Route path='/search' element={<Search/>}/>
+            <Route path='/movie/:id' element={<Detail/>}/>
           </Route>
       </Routes>
     </div>

@@ -36,9 +36,9 @@ const Navlinks = () => {
     ]
   return (
     <>
+    <ul className='flex items-center gap-8'>
         {navLinks?.map(item => (
-            <ul key={item.id}>
-                <li className={`${Mode ? "text-black" : "text-white-person"}`}>
+                <li className={`${Mode ? "text-black" : "text-white-person"}`} key={item.id}>
                     <NavLink to={item.link} className='link'>
                         <div className='flex flex-col items-center gap-2'>
                             {item.icon}
@@ -46,11 +46,10 @@ const Navlinks = () => {
                         </div>
                     </NavLink>
                 </li>
-            </ul>
-
         ))}
+    </ul>
     </>
   )
 }
 
-export default Navlinks
+export default React.memo(Navlinks)

@@ -29,4 +29,4 @@ const Mode = () => {
   )
 }
 
-export default Mode
+export default React.memo(Mode)
