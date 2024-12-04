@@ -57,24 +57,29 @@ const Carousel = () => {
                     className="rounded-xl h-full object-contain"
                   />
                 ) : (
-                  <Skeleton variant="rectangular" width={1390} height={640} sx={{
+                  <Skeleton variant="rectangular" className="z-40" width={1390} height={640} sx={{
                     bgcolor: Mode ? "" : "white",
                   }}/>
                 )}
-                <div className="w-full h-full absolute z-50 bottom-0 left-[50%] translate-x-[-50%] bg-radial-[at_100%_100%] text-white flex gra">
-                  <div className="absolute bottom-6 left-[50%] translate-x-[-50%] flex flex-col items-center gap-4">
-                    <h2>{item?.original_title}</h2>
-                    <p>
-                      2{item?.release_date} •{" "}
-                      {item?.original_language.toUpperCase()} • average:{" "}
-                      {item?.vote_average}
-                    </p>
-                    <button className="flex items-center justify-center bg-white-person px-[130px] py-3 rounded-lg text-red-person gap-3 font-semibold">
-                      <img src={play} alt="play" />
-                      Смотреть
-                    </button>
+                {
+                  isFetching ?
+                  <></>
+                  :
+                  <div className="w-full h-full absolute z-30 bottom-0 left-[50%] translate-x-[-50%] bg-radial-[at_100%_100%] text-white flex  gra">
+                    <div className="absolute bottom-6 left-[50%] translate-x-[-50%] flex flex-col items-center gap-4">
+                      <h2>{item?.original_title}</h2>
+                      <p>
+                        2{item?.release_date} •{" "}
+                        {item?.original_language.toUpperCase()} • average:{" "}
+                        {item?.vote_average}
+                      </p>
+                      <button className="flex items-center justify-center bg-white-person px-[130px] py-3 rounded-lg text-red-person gap-3 font-semibold">
+                        <img src={play} alt="play" />
+                        Смотреть
+                      </button>
+                    </div>
                   </div>
-                </div>
+                }
               </div>
             </SwiperSlide>
           ))}

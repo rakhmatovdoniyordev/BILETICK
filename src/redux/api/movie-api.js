@@ -15,7 +15,21 @@ export const movieApi = api.injectEndpoints({
         params: {
           api_key: import.meta.env.VITE_API_KEY,
         },
+        providesTags: ["Movie"]
       }),
+    }),
+    getMovieDiscover: build.query({
+      query: (params) => ({
+        url: `/discover/movie`,
+        params
+      }),
+      providesTags: ["Movie"]
+    }),
+    getMovieSimilar: build.query({
+      query: (id) => ({
+        url: `/movie/${id}/similar`,
+      }),
+      providesTags: ["Movie"]
     }),
   }),
 })
@@ -23,5 +37,7 @@ export const movieApi = api.injectEndpoints({
 
 export const {
     useGetMovieQuery,
-    useGetMovieDetailsQuery
+    useGetMovieDetailsQuery,
+    useGetMovieDiscoverQuery,
+    useGetMovieSimilarQuery,
 } = movieApi

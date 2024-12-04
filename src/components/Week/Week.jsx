@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,22 +9,17 @@ import "swiper/css/pagination";
 import "./week.css";
 import { FreeMode, Navigation } from "swiper/modules";
 import { useGetMovieQuery } from "../../redux/api/movie-api";
-import { MOVIE_CATEGORY } from "../../static";
 import { Skeleton } from "@mui/material";
 import CustomPagination from "../Pagination/CustomPagination";
 
 const Week = () => {
-  const [page, setPage] = useState(1);
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
+  // const [page, setPage] = useState(1);
+  // const handleChange = (value) => {
+  //   setPage(value);
+  // };
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
-  const [type, setType] = useState("now_playing")
-  const {data, isFetching} = useGetMovieQuery({type, params: {page}})
-  const handleChangeType = (item) => {
-    setType(item)
-    setPage(1)
-  }
+  const type = "top_rated"
+  const {data, isFetching} = useGetMovieQuery({type/* , params: {page} */})
   return (
     <section className="mt-[50px]">
       <div className="container">
@@ -36,22 +31,9 @@ const Week = () => {
           >
             На неделе
           </p>
-          <Link className="flex items-center gap-1 text-red-person font-medium">
+          <Link to={"/sessions"} className="flex items-center gap-1 text-red-person font-medium">
             Показать все <FaAngleRight />
           </Link>
-        </div>
-        <div className="flex justify-center gap-3 mb-8">
-          {
-            MOVIE_CATEGORY?.map(category => (
-              <NavLink
-                key={category.id}
-                onClick={()=> handleChangeType(category.path)}
-                className=''
-                >
-                  <p className={`px-6 py-2 border border-red-person rounded-md font-aeonik ${Mode ? "text-black" : "text-white"}`}>{category.title}</p>
-              </NavLink>
-            ))
-          }
         </div>
         <div>
           <Swiper
@@ -107,9 +89,9 @@ const Week = () => {
             }
           </Swiper>
         </div>
-        <div className="flex justify-center mt-7 select-none">
+        {/* <div className="flex justify-center mt-7 select-none">
         <CustomPagination count={data?.total_pages > 500 ? 500 : data?.total_pages} animation='wave' variant="outlined" page={page} onChange={handleChange} isDarkMode={Mode} size={"large"}/>
-        </div>
+        </div> */}
       </div>
     </section>
   );
