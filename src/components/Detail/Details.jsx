@@ -27,7 +27,7 @@ const MovieDetail = () => {
   const { data } = useGetMovieSimilarQuery(id);
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [activeTab, setActiveTab] = useState("tickets");
-
+  console.log(movie);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -76,7 +76,7 @@ const MovieDetail = () => {
     >
       <div className="container">
         <div
-          className="w-full h-[700px] mt-10 flex items-center bg-cover bg-center"
+          className={`w-full ${movie.backdrop_path === null ? "h-auto bg-slate-500 py-6" : "h-[700px]"} mt-10 flex items-center bg-cover bg-center`}
           style={{
             backgroundImage: `url(${import.meta.env.VITE_IMAGE_URL}${
               movie.backdrop_path

@@ -5,6 +5,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 import { useGetGenerQuery } from "../../redux/api/gener-api";
 import { useGetMovieDiscoverQuery } from "../../redux/api/movie-api";
+import not from "../../assets/not.jpg"
 
 const Session = () => {
   const [params, setParams] = useSearchParams()
@@ -16,12 +17,12 @@ const Session = () => {
   const { data, isFetching } = useGetMovieDiscoverQuery({
     with_genres: selectedGenre.join(","), page: page,
   });
-
+  console.log(data?.total_results);
   useEffect(()=>{
     if(!params.get("path")){
       setSelectedGenre([])
     }else{
-      setSelectedGenre(params.get("path").split(",").map(Number)); 
+      setSelectedGenre(params.get("path").split(",").map(Number));
     }
   }, [params.get("path")])
 
@@ -126,16 +127,29 @@ const Session = () => {
           )}
         </div>
           <div className="flex justify-center mt-7 select-none">
-            <CustomPagination
-              count={data?.total_pages > 500 ? 500 : data?.total_pages}
-              animation="wave"
-              variant="outlined"
-              page={page}
-              onChange={handleChangePage}
-              isDarkMode={Mode}
-              size={"large"}
-            />
+            {
+              !data?.total_results ?
+              <></>
+              :
+              <CustomPagination
+                count={data?.total_pages > 500 ? 500 : data?.total_pages}
+                animation="wave"
+                variant="outlined"
+                page={page}
+                onChange={handleChangePage}
+                isDarkMode={Mode}
+                size={"large"}
+              />
+            }
           </div>
+          {
+           !data?.total_results  && (
+            <div className="w-full flex flex-col items-center">
+              <img src={not} alt="" />
+              <h2>Movie Not Found</h2>
+            </div>
+           )
+          }
       </div>
     </section>
   );
