@@ -36,7 +36,7 @@ const Navlinks = () => {
     ]
   return (
     <>
-    <ul className='flex items-center gap-8'>
+    <ul className='flex items-center gap-8 max-[990px]:hidden'>
         {navLinks?.map(item => (
                 <li className={`${Mode ? "text-black" : "text-white-person"}`} key={item.id}>
                     <NavLink to={item.link} className='link'>

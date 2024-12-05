@@ -4,34 +4,38 @@ import { useSelector } from "react-redux";
 import { Skeleton } from "@mui/material";
 import {
   useGetMovieDetailsQuery,
+  useGetMovieImageQuery,
   useGetMovieSimilarQuery,
 } from "../../redux/api/movie-api";
 import imdb from "../../assets/IMDb.png";
 import play from "../../assets/play.png";
 import MovieCard from "../Card/MovieCard";
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/pagination';
-
-import './Detail.css';
-
-// import required modules
-import { FreeMode, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import "./Detail.css";
+import { FreeMode, Navigation } from "swiper/modules";
+import DetailsImages from "./DetailsImages";
+import not from "../../assets/not.jpg";
 
 const MovieDetail = () => {
+  //ID olish uchun
   const { id } = useParams();
+  //Filmni apidan olish uchun
   const { data: movie, isFetching } = useGetMovieDetailsQuery(id);
+  //Filmga aloqador o'xshash filmlarni apidan olish
   const { data } = useGetMovieSimilarQuery(id);
+  //Film rasmlarini Apidan olish
+  const { data: images } = useGetMovieImageQuery(id);
+  // Redux-toolkitdan Mode olish
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [activeTab, setActiveTab] = useState("tickets");
-  console.log(movie);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Malumot kelguncha Skeleton loading chiqishi
   if (isFetching) {
     return (
       <section className="mt-[50px] px-4">
@@ -44,22 +48,25 @@ const MovieDetail = () => {
               className="rounded-lg md:w-1/3 mt-10"
             />
           </div>
-          <div className="grid grid-cols-5 gap-5">
-            <Skeleton variant="rectangular" width={204}
-              height={116}
-              className="rounded-lg md:w-1/3 mt-10"/>
-              <Skeleton variant="rectangular" width={204}
-              height={116}
-              className="rounded-lg md:w-1/3 mt-10"/>
-              <Skeleton variant="rectangular" width={204}
-              height={116}
-              className="rounded-lg md:w-1/3 mt-10"/>
-              <Skeleton variant="rectangular" width={204}
-              height={116}
-              className="rounded-lg md:w-1/3 mt-10"/>
-              <Skeleton variant="rectangular" width={204}
-              height={116}
-              className="rounded-lg md:w-1/3 mt-10"/>
+          <div className="grid grid-cols-3 gap-5">
+            <Skeleton
+              variant="rectangular"
+              width={400}
+              height={200}
+              className="rounded-lg md:w-1/3 mt-10"
+            />
+            <Skeleton
+              variant="rectangular"
+              width={400}
+              height={200}
+              className="rounded-lg md:w-1/3 mt-10"
+            />
+            <Skeleton
+              variant="rectangular"
+              width={400}
+              height={200}
+              className="rounded-lg md:w-1/3 mt-10"
+            />
           </div>
         </div>
       </section>
@@ -71,23 +78,19 @@ const MovieDetail = () => {
   }
 
   return (
-    <section
-      className={`mt-[50px] font-aeonik ${Mode ? "text-black" : "text-white"}`}
-    >
+    <section className={` font-aeonik ${Mode ? "text-black" : "text-white"}`}>
       <div className="container">
-        <div
-          className={`w-full ${movie.backdrop_path === null ? "h-auto bg-slate-500 py-6" : "h-[700px]"} mt-10 flex items-center bg-cover bg-center`}
-          style={{
-            backgroundImage: `url(${import.meta.env.VITE_IMAGE_URL}${
-              movie.backdrop_path
-            })`,
-          }}
-        >
-          <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7 w-full px-4">
+        <div>
+          <DetailsImages data={images} />
+        </div>
+        <div className="mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7 w-full">
             {movie.production_companies.map((item) => (
               <div
                 key={item.id}
-                className="p-3 rounded-xl backdrop-blur-md bg-[#fcfcfc80]"
+                className={`${
+                  Mode ? "bg-[#cfcfcf]" : "bg-[#111111]"
+                } p-3 rounded-xl backdrop-blur-md`}
               >
                 <p className="text-center text-lg md:text-xl mb-2">
                   Production Company:
@@ -163,6 +166,10 @@ const MovieDetail = () => {
                     {movie.genres.map((genre) => genre.name).join(", ")}
                   </p>
                   <p className="text-base md:text-lg mb-4">{movie.overview}</p>
+                  <p className="text-base md:text-lg mr-2">
+                    <span className="font-semibold">Budget:</span>{" "}
+                    {movie.budget.brm()} $
+                  </p>
                   <div className="flex items-center mb-2">
                     <p className="text-base md:text-lg mr-2">
                       <span className="font-semibold">Rating:</span>{" "}
@@ -191,77 +198,86 @@ const MovieDetail = () => {
                   <h2 className="text-4xl">Похожий:</h2>
                 </div>
                 <div>
-                  <Swiper
-                    style={{
-                      "--swiper-navigation-color": "#f00",
-                      "--swiper-pagination-color": "#fff",
-                    }}
-                    slidesPerView={4}
-                    spaceBetween={30}
-                    freeMode={true}
-                    navigation={true}
-                    modules={[FreeMode, Navigation]}
-                    className="mySwiper2"
-                  >
-                    {(isFetching
-                      ? Array.from(new Array(4))
-                      : data?.results
-                    )?.map((movie, inx) => (
-                      <SwiperSlide key={movie ? movie.id : inx}>
-                        <div>
-                          <div className={`w-full mb-3`}>
-                            {movie ? (
-                              <Link to={`/movie/${movie.id}`}>
-                                <img
-                                  src={
-                                    import.meta.env.VITE_IMAGE_URL +
-                                    movie.poster_path
-                                  }
-                                  alt=""
-                                  className="w-full h-[400px]"
-                                  loading="lazy"
+                    <Swiper
+                      style={{
+                        "--swiper-navigation-color": "#f00",
+                        "--swiper-pagination-color": "#fff",
+                      }}
+                      slidesPerView={4}
+                      spaceBetween={30}
+                      freeMode={true}
+                      navigation={true}
+                      modules={[FreeMode, Navigation]}
+                      className="mySwiper2"
+                    >
+                      {(isFetching
+                        ? Array.from(new Array(4))
+                        : data?.results
+                      )?.map((movie, inx) => (
+                        <SwiperSlide key={movie ? movie.id : inx}>
+                          <div>
+                            <div className={`w-full h-[400px] mb-3`}>
+                              {movie ? (
+                                <Link to={`/movie/${movie.id}`}>
+                                  <img
+                                    src={
+                                      movie.poster_path
+                                        ? `${import.meta.env.VITE_IMAGE_URL}${
+                                            movie.poster_path
+                                          }`
+                                        : not
+                                    }
+                                    alt={movie.name}
+                                    className="w-full h-full object-contain"
+                                    loading="lazy"
+                                  />
+                                </Link>
+                              ) : (
+                                <Skeleton
+                                  variant="rectangular"
+                                  width={305}
+                                  height={457}
                                 />
-                              </Link>
-                            ) : (
-                              <Skeleton
-                                variant="rectangular"
-                                width={305}
-                                height={457}
-                              />
-                            )}
+                              )}
+                            </div>
+                            <div
+                              className={`flex flex-col items-start gap-2 ${
+                                Mode ? "text-black" : "text-white"
+                              }`}
+                            >
+                              {movie ? (
+                                <h2 className="font-aeonik text-[24px] font-medium">
+                                  {movie.original_title}
+                                </h2>
+                              ) : (
+                                <Skeleton
+                                  variant="text"
+                                  width={305}
+                                  sx={{ fontSize: "2rem" }}
+                                />
+                              )}
+                              {movie ? (
+                                <p className="font-aeonik text-[#4D4D4D] text-[14px] font-medium">
+                                  {movie.vote_average} / 10
+                                </p>
+                              ) : (
+                                <Skeleton
+                                  variant="text"
+                                  width={305}
+                                  sx={{ fontSize: "1rem" }}
+                                />
+                              )}
+                            </div>
                           </div>
-                          <div
-                            className={`flex flex-col items-start gap-2 ${
-                              Mode ? "text-black" : "text-white"
-                            }`}
-                          >
-                            {movie ? (
-                              <h2 className="font-aeonik text-[24px] font-medium">
-                                {movie.original_title}
-                              </h2>
-                            ) : (
-                              <Skeleton
-                                variant="text"
-                                width={305}
-                                sx={{ fontSize: "2rem" }}
-                              />
-                            )}
-                            {movie ? (
-                              <p className="font-aeonik text-[#4D4D4D] text-[14px] font-medium">
-                                {movie.vote_average} / 10
-                              </p>
-                            ) : (
-                              <Skeleton
-                                variant="text"
-                                width={305}
-                                sx={{ fontSize: "1rem" }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  {
+                    !data?.reselts &&
+                    <div className="w-full h-[200px] flex justify-center items-center">
+                      <h2 className="font-aeonik text-[28px] font-semibold">Похожих фильмов не найдено</h2>
+                    </div>
+                  }
                 </div>
               </div>
             </>

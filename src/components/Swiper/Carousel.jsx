@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import play from "../../assets/play.png";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -43,11 +41,9 @@ const Carousel = () => {
           {(isFetching ? Array.from(new Array(4)) : apiData)?.map((item) => (
             <SwiperSlide
               key={item?.id}
-              className={`rounded-xl ${
-                Mode ? "" : "border-[2px] border-white"
-              }`}
+              className={`rounded-xl`}
             >
-              <div className="relative w-full overflow-hidden h-[640px]">
+              <div className="relative w-full rounded-xl overflow-hidden h-[640px] max-[768px]:h-[480px] max-[480px]:h-[360px] max-[300px]:h-[240px]">
                 {item ? (
                   <img
                     src={`${import.meta.env.VITE_IMAGE_URL}${
@@ -58,22 +54,20 @@ const Carousel = () => {
                   />
                 ) : (
                   <Skeleton variant="rectangular" className="z-40" width={1390} height={640} sx={{
-                    bgcolor: Mode ? "" : "white",
+                    bgcolor: Mode ? "grey.300" : "grey.800",
                   }}/>
                 )}
                 {
-                  isFetching ?
-                  <></>
-                  :
+                  !isFetching &&
                   <div className="w-full h-full absolute z-30 bottom-0 left-[50%] translate-x-[-50%] bg-radial-[at_100%_100%] text-white flex  gra">
                     <div className="absolute bottom-6 left-[50%] translate-x-[-50%] flex flex-col items-center gap-4">
-                      <h2>{item?.original_title}</h2>
-                      <p>
+                      <h2 className="text-2xl font-bold mb-2 max-[480px]:text-xl max-[300px]:text-lg">{item?.original_title}</h2>
+                      <p className="mb-4 text-sm max-[300px]:text-xs">
                         2{item?.release_date} •{" "}
                         {item?.original_language.toUpperCase()} • average:{" "}
                         {item?.vote_average}
                       </p>
-                      <button className="flex items-center justify-center bg-white-person px-[130px] py-3 rounded-lg text-red-person gap-3 font-semibold">
+                      <button className="flex items-center justify-center bg-white-person px-[130px] py-3 rounded-lg text-red-person gap-3 font-semibold max-[480px]:px-4 max-[300px]:text-sm">
                         <img src={play} alt="play" />
                         Смотреть
                       </button>
@@ -97,9 +91,7 @@ const Carousel = () => {
             (item, index) => (
               <SwiperSlide
                 key={`thumb-${item?.id ?? index}`}
-                className={`rounded-lg ${
-                  Mode ? "border-none" : "border-2 border-white"
-                }`}
+                className={`rounded-lg`}
               >
                 {item ? (
                   <img
@@ -110,7 +102,9 @@ const Carousel = () => {
                     className="rounded-lg w-full h-[187px] object-cover"
                   />
                 ) : (
-                  <Skeleton variant="rectangular" width={332} height={187}/>
+                  <Skeleton variant="rectangular" width={332} height={187} sx={{
+                    bgcolor: Mode ? "grey.300" : "grey.800",
+                  }}/>
                 )}
               </SwiperSlide>
             )

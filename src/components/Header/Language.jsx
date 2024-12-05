@@ -4,16 +4,18 @@ import { languages } from '../../static'
 import ru from "../../assets/RU.png"
 import { useSelector } from 'react-redux'
 import Mode from '../Mode/Mode'
+import { LuMenu } from "react-icons/lu";
+import { IoIosClose } from "react-icons/io";
 
-const Language = () => {
+const Language = ({func, bool}) => {
   const [isOpen, setIsOpen] = useState(false)
   const dark = useSelector((state) =>  state.isDarkMode.isDarkMode);
 
   return (
-    <div className="relative flex items-center gap-5 z-[90]">
+    <div className="relative flex items-center gap-5 z-50">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 text-white hover:text-gray-300 transition-colors"
+        className="flex items-center gap-1 text-white hover:text-gray-300 transition-colors max-[990px]:hidden"
       >
         <img
           src={ru}
@@ -24,7 +26,17 @@ const Language = () => {
         <MdKeyboardArrowDown className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''} ${dark ? "text-black" : "text-white-person"}`} />
       </button>
       <Mode/>
-      <button className='px-[65px] py-[18px] rounded-lg bg-red-person text-white-person'>Войти</button>
+      <button className='px-[65px] py-[18px] max-[800px]:px-5 max-[800px]:py-3 rounded-lg bg-red-person text-white-person max-[990px]:hidden'>Войти</button>
+      <div className='hidden max-[990px]:block'>
+        <button className='border p-1 rounded-lg' onClick={()=> func(!bool)}>
+          {
+            bool ?
+            <IoIosClose className={`${dark ? "text-black" : "text-white-person"} text-4xl`}/>
+            :
+            <LuMenu className={`${dark ? "text-black" : "text-white-person"} text-4xl`}/>
+          }
+        </button>
+      </div>
 
 
       {isOpen && (

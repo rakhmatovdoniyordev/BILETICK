@@ -23,10 +23,9 @@ const Footer = () => {
   return (
     <div className="container">
       <footer className={`${Mode ? "bg-[#cfcfcf]" : "bg-[#111111]" } text-white p-8 rounded-lg mb-10 mt-[120px] font-aeonik`}>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Logo and Download Section */}
-            <div className="flex flex-col justify-between">
-              <div className="">
+          <div className="grid grid-cols-4 max-[990px]:grid-cols-2 max-[510px]:grid-cols-1 max-[550px]: gap-8">
+            <div className="flex flex-col justify-between max-[510px]:items-center">
+              <div className="mb-4">
                 <img src={logo} alt="" />
               </div>
               <div className="space-y-2 flex flex-col">
@@ -38,9 +37,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-
-            {/* About Us Section */}
-            <div className={`${Mode ? "text-black" : "text-white-person"}`}>
+            <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
               <h3 className="text-lg font-semibold mb-4">О нас</h3>
               <ul className="space-y-2">
                 <li>
@@ -72,9 +69,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            {/* Categories Section */}
-            <div className={`${Mode ? "text-black" : "text-white-person"}`}>
+            <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
               <h3 className="text-lg font-semibold mb-4">Категории</h3>
               <ul className="space-y-2">
                 <li>
@@ -115,9 +110,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            {/* Contact Section */}
-            <div className={`${Mode ? "text-black" : "text-white-person"}`}>
+            <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
               <h3 className="text-lg font-semibold mb-4">Связаться с нами</h3>
               <a
                 href="tel:+998958973338"

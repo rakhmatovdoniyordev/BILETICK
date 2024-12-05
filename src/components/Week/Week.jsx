@@ -9,8 +9,10 @@ import "swiper/css/pagination";
 import "./week.css";
 import { FreeMode, Navigation } from "swiper/modules";
 import { useGetMovieQuery } from "../../redux/api/movie-api";
+import not from "../../assets/not.jpg";
 import { Skeleton } from "@mui/material";
-import CustomPagination from "../Pagination/CustomPagination";
+import { useMediaQuery } from "react-responsive";
+// import CustomPagination from "../Pagination/CustomPagination";
 
 const Week = () => {
   // const [page, setPage] = useState(1);
@@ -20,6 +22,15 @@ const Week = () => {
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const type = "top_rated"
   const {data, isFetching} = useGetMovieQuery({type/* , params: {page} */})
+
+  const isSmall = useMediaQuery({ query: "(max-width: 400px)" });
+  const isMedium = useMediaQuery({ query: "(min-width: 401px) and (max-width: 700px)" });
+  const isLarge = useMediaQuery({ query: "(min-width: 701px)" });
+  const skeletonSize = isSmall
+    ? { width: 100, height: 150 }
+    : isMedium
+    ? { width: 200, height: 300 }
+    : { width: 305, height: 457 };
   return (
     <section className="mt-[50px]">
       <div className="container">
@@ -43,6 +54,24 @@ const Week = () => {
             }}
             slidesPerView={4}
             spaceBetween={30}
+            breakpoints={{
+              300: {
+                slidesPerView: 1,
+                spaceBetween: 8,
+              },
+              400:{
+                slidesPerView: 2,
+                spaceBetween: 15,
+              },
+              700: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              990: {
+                slidesPerView: 4,
+                spaceBetween: 30
+              }
+            }}
             freeMode={true}
             navigation={true}
             modules={[FreeMode, Navigation]}
@@ -56,10 +85,15 @@ const Week = () => {
                     {
                       movie ?
                       <Link to={`/movie/${movie.id}`}>
-                        <img src={import.meta.env.VITE_IMAGE_URL + movie.poster_path} alt="" className="w-full h-[400px]" loading="lazy"/>
+                        <img src={movie.poster_path
+                          ? `${import.meta.env.VITE_IMAGE_URL}${movie.poster_path}`
+                          : not} alt="" className="w-full h-[400px]" loading="lazy"/>
                       </Link>
                       :
-                      <Skeleton variant="rectangular" width={305} height={457} />
+                      <Skeleton
+                      variant="rectangular"
+                      width={skeletonSize.width}
+                      height={skeletonSize.height}/>
                     }
                   </div>
                   <div
@@ -72,7 +106,7 @@ const Week = () => {
                       {movie.original_title}
                     </h2>
                     :
-                    <Skeleton variant="text" width={305} sx={{ fontSize: '2rem' }} />
+                    <Skeleton variant="text" width={skeletonSize.width} sx={{ fontSize: '2rem' }} />
                     }
                     {
                       movie ?
@@ -80,7 +114,7 @@ const Week = () => {
                         {movie.vote_average} / 10
                       </p>
                       :
-                      <Skeleton variant="text" width={305} sx={{ fontSize: '1rem' }} />
+                      <Skeleton variant="text" width={skeletonSize.width} sx={{ fontSize: '1rem' }} />
                     }
                   </div>
                 </div>
