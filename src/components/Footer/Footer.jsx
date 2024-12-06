@@ -22,7 +22,7 @@ const Footer = () => {
   const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
   return (
     <div className="container">
-      <footer className={`${Mode ? "bg-[#cfcfcf]" : "bg-[#111111]" } text-white p-8 rounded-lg mb-10 mt-[120px] font-aeonik`}>
+      <footer className={`${Mode ? "bg-[#cfcfcf]" : "bg-[#111111]" } text-white p-8 rounded-lg mb-10 mt-[120px] max-[1100px]:mt-[95px] max-[990px]:mt-[80px] max-[660px]:mt-[50px] max-[450px]:mt-[40px] font-aeonik`}>
           <div className="grid grid-cols-4 max-[990px]:grid-cols-2 max-[510px]:grid-cols-1 max-[550px]: gap-8">
             <div className="flex flex-col justify-between max-[510px]:items-center">
               <div className="mb-4">

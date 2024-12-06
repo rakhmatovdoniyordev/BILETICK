@@ -26,6 +26,7 @@ const MovieDetail = () => {
   const { data: movie, isFetching } = useGetMovieDetailsQuery(id);
   //Filmga aloqador o'xshash filmlarni apidan olish
   const { data } = useGetMovieSimilarQuery(id);
+  console.log(data);
   //Film rasmlarini Apidan olish
   const { data: images } = useGetMovieImageQuery(id);
   // Redux-toolkitdan Mode olish
@@ -113,7 +114,7 @@ const MovieDetail = () => {
           </div>
         </div>
         <div className="my-10">
-          <div className="flex bg-[#111111] rounded-xl  max-w-[380px] mx-auto">
+          <div className="flex bg-[#111111] rounded-xl  max-w-[380px] max-[550px]:max-w-[250px] mx-auto">
             <button
               onClick={() => setActiveTab("tickets")}
               className={`px-6 py-3 text-lg rounded-xl w-1/2 ${
@@ -198,6 +199,13 @@ const MovieDetail = () => {
                   <h2 className="text-4xl">Похожий:</h2>
                 </div>
                 <div>
+                  {!data.total_results ? (
+                    <div className="w-full h-[200px] flex justify-center items-center">
+                      <h2 className="font-aeonik text-[28px] font-semibold">
+                        Похожих фильмов не найдено
+                      </h2>
+                    </div>
+                  ) : (
                     <Swiper
                       style={{
                         "--swiper-navigation-color": "#f00",
@@ -205,6 +213,24 @@ const MovieDetail = () => {
                       }}
                       slidesPerView={4}
                       spaceBetween={30}
+                      breakpoints={{
+                        300: {
+                          slidesPerView: 1,
+                          spaceBetween: 8,
+                        },
+                        400: {
+                          slidesPerView: 2,
+                          spaceBetween: 15,
+                        },
+                        700: {
+                          slidesPerView: 3,
+                          spaceBetween: 20,
+                        },
+                        990: {
+                          slidesPerView: 4,
+                          spaceBetween: 30,
+                        },
+                      }}
                       freeMode={true}
                       navigation={true}
                       modules={[FreeMode, Navigation]}
@@ -272,12 +298,7 @@ const MovieDetail = () => {
                         </SwiperSlide>
                       ))}
                     </Swiper>
-                  {
-                    !data?.reselts &&
-                    <div className="w-full h-[200px] flex justify-center items-center">
-                      <h2 className="font-aeonik text-[28px] font-semibold">Похожих фильмов не найдено</h2>
-                    </div>
-                  }
+                  )}
                 </div>
               </div>
             </>

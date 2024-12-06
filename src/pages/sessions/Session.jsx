@@ -23,6 +23,7 @@ const Session = () => {
   const { data, isFetching: isMovieFetching } = useGetMovieDiscoverQuery({
     with_genres: selectedGenre.join(","),
     page,
+    without_genres: "10749,18"
   });
 
 
@@ -102,7 +103,10 @@ const Session = () => {
                   width={100}
                   height={42}
                   sx={{
-                    bgcolor: Mode ? "grey" : "white",
+                    bgcolor: Mode ? "grey.400" : "grey.200", // Temaga mos rang
+                    width: "100%", // Kenglik 100% bo'ladi (katta ekranlarda avtomatik o'lchov)
+                    aspectRatio: "1", // Bu qiymat kvadratni hosil qiladi
+                    borderRadius: "4px", // Tugmalar bilan mos dizayn
                   }}
                 />
               )

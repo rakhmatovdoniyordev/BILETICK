@@ -25,7 +25,13 @@ const Card = ({data}) => {
                     />
                   </Link>
                 ) : (
-                  <Skeleton variant="rectangular" width={305} height={457} />
+                  <Skeleton variant="rectangular" sx={{
+                    bgcolor: Mode ? "grey.400" : "grey.100",
+                    width: "100%",
+                    height: "400px",
+                    aspectRatio: "1",
+                    borderRadius: "4px",
+                  }}/>
                 )}
               </div>
               <div
@@ -40,8 +46,12 @@ const Card = ({data}) => {
                 ) : (
                   <Skeleton
                     variant="text"
-                    width={305}
-                    sx={{ fontSize: "2rem" }}
+                    sx={{
+                      bgcolor: Mode ? "grey.400" : "grey.100",
+                      width: "100%",
+                      height: "40px",
+                      fontSize: "2rem",
+                    }}
                   />
                 )}
                 {movie ? (
@@ -51,8 +61,13 @@ const Card = ({data}) => {
                 ) : (
                   <Skeleton
                     variant="text"
-                    width={305}
-                    sx={{ fontSize: "1rem" }}
+                    sx={{
+                      bgcolor: Mode ? "grey.400" : "grey.100",
+                      width: "20%",
+                      fontSize: "2rem",
+                      height: "20px",
+                      borderRadius: "4px",
+                    }}
                   />
                 )}
               </div>

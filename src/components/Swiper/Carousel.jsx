@@ -53,8 +53,12 @@ const Carousel = () => {
                     className="rounded-xl h-full object-contain"
                   />
                 ) : (
-                  <Skeleton variant="rectangular" className="z-40" width={1390} height={640} sx={{
-                    bgcolor: Mode ? "grey.300" : "grey.800",
+                  <Skeleton variant="rectangular" className="z-40" sx={{
+                    bgcolor: Mode ? "grey.400" : "grey.300",
+                    width: "100%",
+                    height: "640px",
+                    aspectRatio: "1",
+                    borderRadius: "4px",
                   }}/>
                 )}
                 {
@@ -102,8 +106,17 @@ const Carousel = () => {
                     className="rounded-lg w-full h-[187px] object-cover"
                   />
                 ) : (
-                  <Skeleton variant="rectangular" width={332} height={187} sx={{
-                    bgcolor: Mode ? "grey.300" : "grey.800",
+                  <Skeleton variant="rectangular" sx={{
+                    bgcolor: Mode ? "grey.400" : "grey.300",
+                    width: "100%",
+                    height: {
+                      xs: 60,  // 0-600px (kichik ekranlar)
+                      sm: 100,  // 600-960px (kichik o'rta ekranlar)
+                      md: 170,  // 960-1280px (o'rta ekranlar)
+                      lg: 200,  // 1280px va undan katta (katta ekranlar)
+                    },
+                    aspectRatio: "1",
+                    borderRadius: "4px",
                   }}/>
                 )}
               </SwiperSlide>

@@ -13,7 +13,7 @@ const Search = () => {
   const [searchValue, setSearchValue] = useState("");
   const [search, setSearch] = useState(searchParams.get("q") || "");
   const { data, isFetching } = useGetMovieSearchQuery({ query: search,
-  page }, { skip: !search });
+  page, include_adult: false }, { skip: !search });
   console.log(data);
 
   const updateParams = (search, pageNumber) => {
@@ -90,7 +90,7 @@ const Search = () => {
           >
             <div className="flex flex-col items-center gap-10">
               <h4>Страница пока пуст</h4>
-              <p>По вашему запросу ничего не найдена</p>
+              <p className="text-center">По вашему запросу ничего не найдена</p>
             </div>
           </div>
         )}

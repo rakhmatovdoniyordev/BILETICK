@@ -21,16 +21,7 @@ const Week = () => {
   // };
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const type = "top_rated"
-  const {data, isFetching} = useGetMovieQuery({type/* , params: {page} */})
-
-  const isSmall = useMediaQuery({ query: "(max-width: 400px)" });
-  const isMedium = useMediaQuery({ query: "(min-width: 401px) and (max-width: 700px)" });
-  const isLarge = useMediaQuery({ query: "(min-width: 701px)" });
-  const skeletonSize = isSmall
-    ? { width: 100, height: 150 }
-    : isMedium
-    ? { width: 200, height: 300 }
-    : { width: 305, height: 457 };
+  const {data, isFetching} = useGetMovieQuery({type/* , params: {page} */, without_genres: "10749,18"})
   return (
     <section className="mt-[50px]">
       <div className="container">
@@ -92,8 +83,13 @@ const Week = () => {
                       :
                       <Skeleton
                       variant="rectangular"
-                      width={skeletonSize.width}
-                      height={skeletonSize.height}/>
+                      sx={{
+                        bgcolor: Mode ? "grey.400" : "grey.300",
+                        width: "80%",
+                        height: "400px",
+                        aspectRatio: "1",
+                        borderRadius: "4px",
+                      }}/>
                     }
                   </div>
                   <div
@@ -106,7 +102,13 @@ const Week = () => {
                       {movie.original_title}
                     </h2>
                     :
-                    <Skeleton variant="text" width={skeletonSize.width} sx={{ fontSize: '2rem' }} />
+                    <Skeleton variant="text" sx={{
+                      bgcolor: Mode ? "grey.400" : "grey.300",
+                      width: "80%",
+                      height: "40px",
+                      fontSize: "2rem",
+                      borderRadius: "4px",
+                    }}/>
                     }
                     {
                       movie ?
@@ -114,7 +116,13 @@ const Week = () => {
                         {movie.vote_average} / 10
                       </p>
                       :
-                      <Skeleton variant="text" width={skeletonSize.width} sx={{ fontSize: '1rem' }} />
+                      <Skeleton variant="text" sx={{
+                        bgcolor: Mode ? "grey.400" : "grey.300",
+                        width: "20%",
+                        fontSize: "2rem",
+                        height: "20px",
+                        borderRadius: "4px",
+                      }}/>
                     }
                   </div>
                 </div>
