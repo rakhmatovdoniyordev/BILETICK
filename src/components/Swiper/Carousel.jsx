@@ -10,8 +10,10 @@ import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import { useGetMovieQuery } from "../../redux/api/movie-api";
 import { useSelector } from "react-redux";
 import { Skeleton } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Carousel = () => {
+  const {t} = useTranslation()
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { data, isFetching } = useGetMovieQuery({
@@ -25,7 +27,6 @@ const Carousel = () => {
         <Swiper
           style={{
             "--swiper-navigation-color": "#f00",
-            "--swiper-pagination-color": "#fff",
           }}
           spaceBetween={10}
           navigation={true}
@@ -71,9 +72,9 @@ const Carousel = () => {
                         {item?.original_language.toUpperCase()} • average:{" "}
                         {item?.vote_average}
                       </p>
-                      <button className="flex items-center justify-center bg-white-person px-[130px] py-3 rounded-lg text-red-person gap-3 font-semibold max-[480px]:px-4 max-[300px]:text-sm">
+                      <button className="flex items-center justify-center bg-white-person px-[130px] py-3 rounded-lg text-red-person gap-3 font-semibold max-[480px]:px-4 max-[300px]:text-sm whitespace-nowrap max-[550px]:text-[14px]">
                         <img src={play} alt="play" />
-                        Смотреть
+                        {t("play")}
                       </button>
                     </div>
                   </div>

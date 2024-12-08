@@ -1,7 +1,10 @@
 export const languages = [
-    'Ру',
-    'En',
-    'Uz'
+    {label: 'Ру',
+     code: 'ru'
+    },
+    {label: 'Uz',
+     code: 'uz'
+    },
 ]
 
 export const MOVIE_CATEGORY = [

@@ -7,8 +7,11 @@ import { useGetGenerQuery } from "../../redux/api/gener-api";
 import { useGetMovieDiscoverQuery } from "../../redux/api/movie-api";
 import not from "../../assets/not.jpg";
 import Card from "../../components/Card/Card";
+import { useTranslation } from "react-i18next";
 
 const Session = () => {
+  const {t} = useTranslation()
+  document.title = "BILETICK | Genres"
   //useSearchParams- URL parametrini olish va ularni boshqarish uchun kerak
   const [params, setParams] = useSearchParams();
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
@@ -23,7 +26,7 @@ const Session = () => {
   const { data, isFetching: isMovieFetching } = useGetMovieDiscoverQuery({
     with_genres: selectedGenre.join(","),
     page,
-    without_genres: "10749,18"
+    without_genres: "10749,18,99"
   });
 
 
@@ -103,10 +106,10 @@ const Session = () => {
                   width={100}
                   height={42}
                   sx={{
-                    bgcolor: Mode ? "grey.400" : "grey.200", // Temaga mos rang
-                    width: "100%", // Kenglik 100% bo'ladi (katta ekranlarda avtomatik o'lchov)
-                    aspectRatio: "1", // Bu qiymat kvadratni hosil qiladi
-                    borderRadius: "4px", // Tugmalar bilan mos dizayn
+                    bgcolor: Mode ? "grey.400" : "grey.200",
+                    width: "100%",
+                    aspectRatio: "1",
+                    borderRadius: "4px",
                   }}
                 />
               )
@@ -131,7 +134,7 @@ const Session = () => {
         {!data?.total_results && (
           <div className="w-full flex flex-col items-center">
             <img src={not} alt="Not Found" />
-            <h2>Movie Not Found</h2>
+            <h2>{t("sessions.title")}</h2>
           </div>
         )}
       </div>

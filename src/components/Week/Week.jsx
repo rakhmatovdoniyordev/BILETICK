@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaAngleRight } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -11,14 +11,23 @@ import { FreeMode, Navigation } from "swiper/modules";
 import { useGetMovieQuery } from "../../redux/api/movie-api";
 import not from "../../assets/not.jpg";
 import { Skeleton } from "@mui/material";
-import { useMediaQuery } from "react-responsive";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { toggleFavourite } from "../../redux/slices/favouriteSlice";
+import { useTranslation } from "react-i18next";
 // import CustomPagination from "../Pagination/CustomPagination";
 
 const Week = () => {
+  const {t} = useTranslation()
   // const [page, setPage] = useState(1);
   // const handleChange = (value) => {
   //   setPage(value);
   // };
+  const dispatch = useDispatch()
+  const favouriteItem = useSelector((state) => state.favourite.items);
+  const handleFavourite = (fav) => {
+    dispatch(toggleFavourite(fav))
+  }
+  const isInFavoutite = (id) => favouriteItem.some(item => item.id === id)
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const type = "top_rated"
   const {data, isFetching} = useGetMovieQuery({type/* , params: {page} */, without_genres: "10749,18"})
@@ -31,10 +40,10 @@ const Week = () => {
               Mode ? "text-black" : "text-white-person"
             } text-[20px] font-medium`}
           >
-            На неделе
+            {t("week.weeks")}
           </p>
           <Link to={"/sessions"} className="flex items-center gap-1 text-red-person font-medium">
-            Показать все <FaAngleRight />
+            {t("week.button")} <FaAngleRight />
           </Link>
         </div>
         <div>
@@ -69,10 +78,18 @@ const Week = () => {
             className="mySwiper2"
           >
             {
-              (isFetching ? Array.from(new Array(4)) : data?.results)?.map((movie, inx) => (
-              <SwiperSlide key={movie ? movie.id : inx}>
-                <div>
-                  <div className={`w-full mb-3`}>
+              (isFetching ? Array.from(new Array(4)) : data?.results)?.map((movie) => (
+              <SwiperSlide key={movie?.id}>
+                <div key={movie?.id}>
+                  <div className={`w-full mb-3 relative`}>
+                    <div className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer">
+                      {
+                        isInFavoutite(movie?.id) ?
+                        <BsBookmarkFill onClick={()=> handleFavourite(movie)} className="text-xl text-white"/>
+                        :
+                        <BsBookmark onClick={()=> handleFavourite(movie)} className="text-xl text-white"/>
+                      }
+                    </div>
                     {
                       movie ?
                       <Link to={`/movie/${movie.id}`}>
@@ -98,7 +115,7 @@ const Week = () => {
                     }`}
                   >
                     {movie ?
-                    <h2 className="font-aeonik text-[24px] font-medium">
+                    <h2 className="font-aeonik text-[24px] font-medium text-left">
                       {movie.original_title}
                     </h2>
                     :

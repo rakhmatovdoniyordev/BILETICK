@@ -59,3 +59,32 @@
     height: 100%;
     object-fit: cover;
   }
+
+
+  /* Carousel.css */
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: #3b3b3b; /* Tugmalar uchun orqa fon */
+  color: red; /* Tugma belgilarining rangi */
+  border-radius: 50%; /* Tugmalarni yumaloq qilish */
+  width: 55px; /* Tugma eni */
+  height: 55px; /* Tugma balandligi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tugmalarni kerakli joyga ko'chirish uchun pozitsiya */
+
+.swiper-button-next::after,
+.swiper-button-prev::after{
+  font-size: 18px;
+  font-weight: 700;
+}
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}

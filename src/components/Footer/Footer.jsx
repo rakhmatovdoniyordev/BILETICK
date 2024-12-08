@@ -17,8 +17,10 @@ import { BsTelephone } from "react-icons/bs";
 import logo from "../../assets/LOGOTYPE.png"
 import google from "../../assets/google-play.png"
 import app from "../../assets/app-store.png"
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const {t} = useTranslation()
   const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
   return (
     <div className="container">
@@ -38,12 +40,12 @@ const Footer = () => {
               </div>
             </div>
             <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
-              <h3 className="text-lg font-semibold mb-4">О нас</h3>
+              <h3 className="text-lg font-semibold mb-4">{t("footer.about")}</h3>
               <ul className="space-y-2">
                 <li>
                   <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
                     <IoNewspaperOutline className="text-[24px] text-red-person"/>
-                    Публичная оферта
+                    {t("footer.public")}
                   </a>
                 </li>
                 <li>
@@ -52,25 +54,25 @@ const Footer = () => {
                     className=" hover:text-red-500 transition flex items-center gap-1"
                   >
                     <BsStars className="text-[24px] text-red-person"/>
-                    Реклама
+                    {t("footer.advertising")}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
                     <FaRegQuestionCircle className="text-[24px] text-red-person"/>
-                    F.A.Q
+                    {t("footer.faq")}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
                     <BsTelephone className="text-[24px] text-red-person"/>
-                    Контакты
+                    {t("footer.contact")}
                   </a>
                 </li>
               </ul>
             </div>
             <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
-              <h3 className="text-lg font-semibold mb-4">Категории</h3>
+              <h3 className="text-lg font-semibold mb-4">{t("footer.category")}</h3>
               <ul className="space-y-2">
                 <li>
                   <a
@@ -78,7 +80,7 @@ const Footer = () => {
                     className="flex items-center space-x-2 hover:text-red-600 transition"
                   >
                     <BiCameraMovie className="text-[24px] text-red-person"/>
-                    <span>Кино</span>
+                    <span>{t("footer.movie")}</span>
                   </a>
                 </li>
                 <li>
@@ -87,7 +89,7 @@ const Footer = () => {
                     className="flex items-center space-x-2 hover:text-red-600 transition"
                   >
                     <MdTheaterComedy className="text-[24px] text-red-person"/>
-                    <span>Театр</span>
+                    <span>{t("footer.theater")}</span>
                   </a>
                 </li>
                 <li>
@@ -96,7 +98,7 @@ const Footer = () => {
                     className="flex items-center space-x-2 hover:text-red-600 transition"
                   >
                     <GiMicrophone className="text-[24px] text-red-person"/>
-                    <span>Концерты</span>
+                    <span>{t("footer.concerts")}</span>
                   </a>
                 </li>
                 <li>
@@ -105,13 +107,13 @@ const Footer = () => {
                     className="flex items-center space-x-2 hover:text-red-600 transition"
                   >
                     <MdOutlineSportsBasketball  className="text-[24px] text-red-person"/>
-                    <span>Спорт</span>
+                    <span>{t("footer.sport")}</span>
                   </a>
                 </li>
               </ul>
             </div>
             <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
-              <h3 className="text-lg font-semibold mb-4">Связаться с нами</h3>
+              <h3 className="text-lg font-semibold mb-4">{t("footer.contactus")}</h3>
               <a
                 href="tel:+998958973338"
                 className="text-red-600 text-xl font-semibold hover:text-red-500 transition"
@@ -119,7 +121,7 @@ const Footer = () => {
                 +998 (95) 897-33-38
               </a>
               <div className="mt-8">
-                <h4 className="text-lg font-semibold mb-4">Социальные сети</h4>
+                <h4 className="text-lg font-semibold mb-4">{t("footer.social")}</h4>
                 <div className="flex space-x-4">
                   <a href="#" className="text-red-600 transition">
                     <FaInstagram className="text-2xl" />

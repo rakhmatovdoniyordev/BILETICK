@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Skeleton } from "@mui/material";
 import {
   useGetMovieDetailsQuery,
@@ -18,15 +18,18 @@ import "./Detail.css";
 import { FreeMode, Navigation } from "swiper/modules";
 import DetailsImages from "./DetailsImages";
 import not from "../../assets/not.jpg";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { toggleFavourite } from "../../redux/slices/favouriteSlice";
+import { useTranslation } from "react-i18next";
 
 const MovieDetail = () => {
+  const {t} = useTranslation()
   //ID olish uchun
   const { id } = useParams();
   //Filmni apidan olish uchun
   const { data: movie, isFetching } = useGetMovieDetailsQuery(id);
   //Filmga aloqador o'xshash filmlarni apidan olish
   const { data } = useGetMovieSimilarQuery(id);
-  console.log(data);
   //Film rasmlarini Apidan olish
   const { data: images } = useGetMovieImageQuery(id);
   // Redux-toolkitdan Mode olish
@@ -34,8 +37,16 @@ const MovieDetail = () => {
   const [activeTab, setActiveTab] = useState("tickets");
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
+  const dispatch = useDispatch();
+  const favouriteItem = useSelector((state) => state.favourite.items);
+  const isInFavoutite = (id) => favouriteItem.some((item) => item.id === id);
+  const handleFavourite = (fav) => {
+    dispatch(toggleFavourite(fav));
+  };
+
+  document.title = movie? movie?.title : "BILETICK";
   // Malumot kelguncha Skeleton loading chiqishi
   if (isFetching) {
     return (
@@ -123,7 +134,7 @@ const MovieDetail = () => {
                   : "text-white"
               }`}
             >
-              Билеты
+              {t("detail.ticket")}
             </button>
             <button
               onClick={() => setActiveTab("about")}
@@ -133,7 +144,7 @@ const MovieDetail = () => {
                   : "text-white"
               }`}
             >
-              О фильме
+              {t("detail.aboutfilm")}
             </button>
           </div>
           {activeTab === "tickets" ? (
@@ -190,19 +201,19 @@ const MovieDetail = () => {
                     }`}
                   >
                     <img src={play} alt="play" className="w-6 h-6" />
-                    Смотреть
+                    {t("play")}
                   </button>
                 </div>
               </div>
               <div className="mt-16">
                 <div className="mb-10">
-                  <h2 className="text-4xl">Похожий:</h2>
+                  <h2 className="text-4xl">{t("detail.similar")}</h2>
                 </div>
                 <div>
                   {!data.total_results ? (
                     <div className="w-full h-[200px] flex justify-center items-center">
                       <h2 className="font-aeonik text-[28px] font-semibold">
-                        Похожих фильмов не найдено
+                        {t("detail.notsimilar")}
                       </h2>
                     </div>
                   ) : (
@@ -242,7 +253,20 @@ const MovieDetail = () => {
                       )?.map((movie, inx) => (
                         <SwiperSlide key={movie ? movie.id : inx}>
                           <div>
-                            <div className={`w-full h-[400px] mb-3`}>
+                            <div className={`w-full h-[400px] mb-3 relative`}>
+                              <div className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer">
+                                {isInFavoutite(movie?.id) ? (
+                                  <BsBookmarkFill
+                                    onClick={() => handleFavourite(movie)}
+                                    className="text-xl text-white"
+                                  />
+                                ) : (
+                                  <BsBookmark
+                                    onClick={() => handleFavourite(movie)}
+                                    className="text-xl text-white"
+                                  />
+                                )}
+                              </div>
                               {movie ? (
                                 <Link to={`/movie/${movie.id}`}>
                                   <img

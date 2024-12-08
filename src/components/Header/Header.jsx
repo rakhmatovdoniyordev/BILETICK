@@ -11,25 +11,30 @@ import { TbTicket } from "react-icons/tb";
 import { FiSearch } from "react-icons/fi";
 import ru from "../../assets/RU.png";
 import { languages } from "../../static";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false); // Til tanlash menyusi
   const [menu, setMenu] = useState(false); // Asosiy menyu
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [header, setHeader] = useState(false);
+  const { t, i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState("Ру");
+  const handleLanguageChange = (lang) => {
+    setSelectedLanguage(lang.label);
+    i18n.changeLanguage(lang.code);
+    setIsOpen(false);
+  };
 
-  // Scrollni kuzatish
-  window.addEventListener("scroll", () => {
-    if (document.documentElement.scrollTop >= 200) {
-      setHeader(true);
-    } else {
-      setHeader(false);
-    }
-  });
+  // Modal menyularni yopish
+  const handleCloseModals = () => {
+    setIsOpen(false);
+    setMenu(false);
+  };
 
-  // Modal menyularni boshqarish
+  // Menyuni ochish va yopish
   const handleMenuToggle = (e) => {
-    e.stopPropagation(); // Eventni ota elementlarga o'tishini to'xtatish
+    e.stopPropagation();
     setMenu(!menu);
   };
 
@@ -38,17 +43,13 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  // Modal oynalarning tashqarisini bosganda yopilishi
-  const handleCloseModals = () => {
-    setIsOpen(false);
-    setMenu(false);
-  };
-
   return (
     <>
       {/* Header */}
       <header
-        className={`${Mode ? "bg-[#fff]" : "bg-[#000]"} duration-300 sticky top-0 z-40 ${
+        className={`${
+          Mode ? "bg-[#fff]" : "bg-[#000]"
+        } duration-300 sticky top-0 z-40 ${
           header
             ? Mode
               ? "shadow-lg shadow-[#0000001a]"
@@ -72,37 +73,71 @@ const Header = () => {
       </header>
       <div
         onClick={handleCloseModals}
-        className={`w-screen h-screen fixed text-center top-[89px] z-[90] ${Mode ? "bg-[#2c2c2c6e]" : "bg-[#ffffff33]"}  duration-700  border-t border-t-[#00000017]
+        className={`w-screen h-screen fixed text-center top-[89px] z-[90] ${
+          Mode ? "bg-[#2c2c2c6e]" : "bg-[#ffffff33]"
+        }  duration-700  border-t border-t-[#00000017]
             ${
               menu ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"
             }`}
       >
         <div className={`${Mode ? "bg-white" : " bg-black"} pt-5`}>
           <ul className="flex flex-col mb-7">
-            <li className={`py-[15px] ${Mode ? "text-black" : "text-white-person"}`}>
-              <NavLink onClick={handleMenuToggle} to={"/"} className="flex justify-center">
+            <li
+              className={`py-[15px] ${
+                Mode ? "text-black" : "text-white-person"
+              }`}
+            >
+              <NavLink
+                onClick={handleMenuToggle}
+                to={"/"}
+                className="flex justify-center"
+              >
                 <p className="flex gap-1 items-center">
                   <BiMovie className="w-6 h-6 " /> <span>Афиша</span>
                 </p>
               </NavLink>
             </li>
-            <li className={`py-[15px] ${Mode ? "text-black" : "text-white-person"}`}>
-              <NavLink onClick={handleMenuToggle} to={"/sessions"} className="flex justify-center">
+            <li
+              className={`py-[15px] ${
+                Mode ? "text-black" : "text-white-person"
+              }`}
+            >
+              <NavLink
+                onClick={handleMenuToggle}
+                to={"/sessions"}
+                className="flex justify-center"
+              >
                 <p className="flex gap-1 items-center">
                   <MdOutlineTheaterComedy className="w-6 h-6 " />{" "}
                   <span>Сеансы</span>
                 </p>
               </NavLink>
             </li>
-            <li className={`py-[15px] ${Mode ? "text-black" : "text-white-person"}`}>
-              <NavLink onClick={handleMenuToggle} to={"/ticket"} className="flex justify-center">
+            <li
+              className={`py-[15px] ${
+                Mode ? "text-black" : "text-white-person"
+              }`}
+            >
+              <NavLink
+                onClick={handleMenuToggle}
+                to={"/ticket"}
+                className="flex justify-center"
+              >
                 <p className="flex gap-1 items-center">
                   <TbTicket className="w-6 h-6 " /> <span>Билеты</span>
                 </p>
               </NavLink>
             </li>
-            <li className={`py-[15px] ${Mode ? "text-black" : "text-white-person"}`}>
-              <NavLink onClick={handleMenuToggle} to={"/search"} className="flex justify-center">
+            <li
+              className={`py-[15px] ${
+                Mode ? "text-black" : "text-white-person"
+              }`}
+            >
+              <NavLink
+                onClick={handleMenuToggle}
+                to={"/search"}
+                className="flex justify-center"
+              >
                 <p className="flex gap-1 items-center">
                   <FiSearch className="w-6 h-6 " /> <span>Поиск</span>
                 </p>
@@ -115,35 +150,41 @@ const Header = () => {
             </button>
           </div>
           <div className="flex justify-center pb-10 h-14 z-50 mx-auto relative">
-            <button
-              onClick={handleLanguageToggle}
-              className="flex items-center gap-1 text-white hover:text-gray-300 transition-colors"
-            >
-              <img src={ru} alt="Language Flag" className="w-5 h-5 rounded-full" />
-              <span className={`${Mode ? "text-black" : "text-white-person"} font-aeonik`}>Ру</span>
-              <MdKeyboardArrowDown
-                className={`w-5 h-5 transition-transform ${
-                  isOpen ? "rotate-180" : ""
-                } ${Mode ? "text-black" : "text-white-person"}`}
-              />
-            </button>
-            {isOpen && (
-            <div
-              className={`absolute top-full z-[100] ${
-                Mode ? "bg-black text-white" : "bg-white text-black"
-              }  mt-2 rounded-md py-1 min-w-[100px]`}
-            >
-              {languages.map((lang) => (
-                <button
-                  key={lang}
-                  className="w-full px-4 py-2 text-left"
-                  onClick={() => setIsOpen(false)}
+          <button
+                onClick={handleLanguageToggle}
+                className="flex items-center gap-1 text-white hover:text-gray-300 transition-colors"
+              >
+                <img src={ru} alt="Language Flag" className="w-5 h-5 rounded-full" />
+                <span
+                  className={`${
+                    Mode ? "text-black" : "text-white-person"
+                  } font-aeonik`}
                 >
-                  {lang}
-                </button>
-              ))}
-            </div>
-          )}
+                  {selectedLanguage}
+                </span>
+                <MdKeyboardArrowDown
+                  className={`w-5 h-5 transition-transform ${
+                    isOpen ? "rotate-180" : ""
+                  } ${Mode ? "text-black" : "text-white-person"}`}
+                />
+              </button>
+              {isOpen && (
+                <div
+                  className={`absolute top-full ${
+                    Mode ? "bg-black text-white" : "bg-white text-black"
+                  } mt-2 border border-gray-700 rounded-md py-1 min-w-[100px]`}
+                >
+                  {languages.map((lang, inx) => (
+                    <button
+                      key={inx}
+                      className="w-full px-4 py-2 text-left hover:bg-gray-200"
+                      onClick={() => handleLanguageChange(lang)}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              )}
           </div>
         </div>
       </div>

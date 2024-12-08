@@ -11,6 +11,11 @@ const DetailsImages = ({data}) => {
   return (
     <>
       <Swiper
+      style={{
+        "--swiper-navigation-color": "#f00",
+        "--swiper-pagination-color": "#fff",
+        "--swiper-button-background": "#000"
+      }}
         spaceBetween={30}
         effect={'fade'}
         navigation={true}

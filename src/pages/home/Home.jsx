@@ -5,6 +5,7 @@ import Week from '../../components/Week/Week';
 
 const Home = () => {
     const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
+    document.title = "BILETICK"
   return (
     <section>
       <Carousel/>

@@ -1,0 +1,46 @@
+{
+    "header": {
+        "poster": "Bosh sahifa",
+        "genre": "Janrlar",
+        "favourite": "Saqlanganlar",
+        "search": "Qidirish",
+        "button": "Ro'yxatdan o'tish"
+    },
+    "footer":{
+        "about": "Biz haqimizda",
+        "public": "Ommaviy taklif",
+        "advertising": "Reklama",
+        "faq": "F.A.Q",
+        "contact": "Aloqalar",
+        "category": "Kategoriyalar",
+        "movie": "Kinolar",
+        "theater": "Teatr",
+        "concerts": "Konsertlar",
+        "sport": "Sport",
+        "contactus": "Biz bilan bog'lanish",
+        "social": "Ijtimoiy tarmoqlar"
+    },
+    "week": {
+        "weeks": "Shu hafta",
+        "button": "Hammasini ko'rsatish"
+    },
+    "saved": {
+        "title": "Sizda hali saqlangan filmlar yoʻq",
+        "desc": "Asosiy sahifadan boshlang - qidiruv orqali kerakli filmlar va multfilmlarni topishingiz yoki tanlovlarni ko'rib chiqishingiz mumkin.",
+        "button": "Asosiy sahifa"
+    },
+    "search": {
+        "title": "Sahifa hozircha boʻsh",
+        "desc": "Sizning so'rovingiz bo'yicha hech narsa topilmadi. Iltimos qidirmoqchi bo'lgan kino yoki mutfilmingizni yozing"
+    },
+    "sessions": {
+        "title": "Film topilmadi :("
+    },
+    "play": "Tomosha qilish",
+    "detail": {
+        "ticket": "Biletlar",
+        "aboutfilm": "Film haqida",
+        "similar": "O'xshash:",
+        "notsimilar": "O'xshash filmlar topilmadi"
+    }
+}

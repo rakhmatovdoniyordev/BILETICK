@@ -5,8 +5,10 @@ import { useGetMovieSearchQuery } from "../../redux/api/movie-api";
 import Card from "../../components/Card/Card";
 import { useSearchParams } from "react-router-dom";
 import CustomPagination from "../../components/Pagination/CustomPagination";
+import { useTranslation } from "react-i18next";
 
 const Search = () => {
+  const {t} = useTranslation()
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [searchParams, setSearchParams] = useSearchParams()
   const [page, setPage] = useState(Number(searchParams.get("page")) || 1);
@@ -14,7 +16,7 @@ const Search = () => {
   const [search, setSearch] = useState(searchParams.get("q") || "");
   const { data, isFetching } = useGetMovieSearchQuery({ query: search,
   page, include_adult: false }, { skip: !search });
-  console.log(data);
+  document.title = "BILETICK | Search"
 
   const updateParams = (search, pageNumber) => {
     const newParams = new URLSearchParams();
@@ -89,8 +91,8 @@ const Search = () => {
             }`}
           >
             <div className="flex flex-col items-center gap-10">
-              <h4>Страница пока пуст</h4>
-              <p className="text-center">По вашему запросу ничего не найдена</p>
+              <h4>{t("search.title")}</h4>
+              <p className="text-center">{t("search.desc")}</p>
             </div>
           </div>
         )}
