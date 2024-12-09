@@ -254,15 +254,15 @@ const MovieDetail = () => {
                         <SwiperSlide key={movie ? movie.id : inx}>
                           <div>
                             <div className={`w-full h-[400px] mb-3 relative`}>
-                              <div className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer">
+                              <div
+                                className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer"
+                                onClick={() => handleFavourite(movie)}>
                                 {isInFavoutite(movie?.id) ? (
                                   <BsBookmarkFill
-                                    onClick={() => handleFavourite(movie)}
                                     className="text-xl text-white"
                                   />
                                 ) : (
                                   <BsBookmark
-                                    onClick={() => handleFavourite(movie)}
                                     className="text-xl text-white"
                                   />
                                 )}

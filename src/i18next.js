@@ -15,8 +15,14 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'ru',
+    supportedLngs: ['ru', 'uz'],
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+      caches: ['localStorage', 'cookie'],
+    },
     debug: false,
+
   });
 
 export default i18n;

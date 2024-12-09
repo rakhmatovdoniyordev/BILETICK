@@ -18,6 +18,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState(false);
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
+  console.log(Mode);
   const [header, setHeader] = useState(false);
   const { i18n } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
@@ -59,12 +60,17 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
+  window.addEventListener("scroll", () => {
+    if (document.documentElement.scrollTop >= 200) {
+      setHeader(true);
+    } else {
+      setHeader(false);
+    }
+  })
   return (
     <>
       <header
-        className={`${
-          Mode ? "bg-[#fff]" : "bg-[#000]"
-        } duration-300 sticky top-0 z-40 ${
+        className={`${Mode ? "bg-[#fff]" : "bg-[#000]"} duration-300 sticky top-0 z-40 ${
           header
             ? Mode
               ? "shadow-lg shadow-[#0000001a]"
@@ -135,7 +141,7 @@ const Header = () => {
             >
               <NavLink
                 onClick={handleMenuToggle}
-                to={"/ticket"}
+                to={"/search"}
                 className="flex justify-center"
               >
                 <p className="flex gap-1 items-center">

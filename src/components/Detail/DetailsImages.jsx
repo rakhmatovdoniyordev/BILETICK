@@ -20,12 +20,12 @@ const DetailsImages = ({data}) => {
         effect={'fade'}
         navigation={true}
         modules={[EffectFade, Navigation]}
-        className="mySwiper select-none"
+        className={`mySwiper3 select-none`}
       >
         {
             img?.map((image, inx)=> (
                 <SwiperSlide key={inx}>
-                <img src={import.meta.env.VITE_IMAGE_URL + image?.file_path} />
+                <img src={import.meta.env.VITE_IMAGE_URL + image?.file_path} className={`${data?.backdrops.length === 0 ? "h-0" : "h-auto"}`}/>
                 </SwiperSlide>
             ))
         }

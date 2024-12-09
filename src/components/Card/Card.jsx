@@ -19,15 +19,16 @@ const Card = ({ data }) => {
       {data?.map((movie, index) => (
         <div key={index}>
           <div className="w-full mb-3 relative">
-            <div className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer">
+            <div
+              className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer"
+              onClick={() => handleFavourite(movie)}
+                  >
               {isInFavoutite(movie?.id) ? (
                 <BsBookmarkFill
-                  onClick={() => handleFavourite(movie)}
                   className="text-xl text-white"
                 />
               ) : (
                 <BsBookmark
-                  onClick={() => handleFavourite(movie)}
                   className="text-xl text-white"
                 />
               )}
