@@ -14,11 +14,9 @@ const Language = ({ func, bool }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dark = useSelector((state) => state.isDarkMode.isDarkMode);
 
-  // Default language logic
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
 
   useEffect(() => {
-    // Initialize language from localStorage or set default
     const storedLang = localStorage.getItem("i18nextLng") || "uz";
     if (storedLang.startsWith("ru")) {
       setSelectedLanguage("Ру");
@@ -31,7 +29,7 @@ const Language = ({ func, bool }) => {
   const handleLanguageChange = (lang) => {
     setSelectedLanguage(lang.label);
     i18n.changeLanguage(lang.code);
-    localStorage.setItem("i18nextLng", lang.code); // Save to localStorage
+    localStorage.setItem("i18nextLng", lang.code);
     setIsOpen(false);
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Language from "./Language";
 import logo from "../../assets/LOGO.png";
@@ -15,25 +15,40 @@ import { languages } from "../../static";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false); // Til tanlash menyusi
-  const [menu, setMenu] = useState(false); // Asosiy menyu
+  const [isOpen, setIsOpen] = useState(false);
+  const [menu, setMenu] = useState(false);
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [header, setHeader] = useState(false);
-  const { t, i18n } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem("i18nextLng" ) || "Uz");
+  const { i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState("Uz");
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("i18nextLng") || "uz";
+    if (storedLang.startsWith("ru")) {
+      setSelectedLanguage("Ру");
+    } else {
+      setSelectedLanguage("Uz");
+    }
+    i18n.changeLanguage(storedLang);
+  }, [i18n]);
+
+  const flags = {
+    uz: uz,
+    ru: ru,
+  };
+
   const handleLanguageChange = (lang) => {
     setSelectedLanguage(lang.label);
     i18n.changeLanguage(lang.code);
+    localStorage.setItem("i18nextLng", lang.code);
     setIsOpen(false);
   };
 
-  // Modal menyularni yopish
   const handleCloseModals = () => {
     setIsOpen(false);
     setMenu(false);
   };
 
-  // Menyuni ochish va yopish
   const handleMenuToggle = (e) => {
     e.stopPropagation();
     setMenu(!menu);
@@ -46,7 +61,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Header */}
       <header
         className={`${
           Mode ? "bg-[#fff]" : "bg-[#000]"
@@ -155,7 +169,7 @@ const Header = () => {
                 onClick={handleLanguageToggle}
                 className="flex items-center gap-1 text-white hover:text-gray-300 transition-colors"
               >
-                <img src={ru} alt="Language Flag" className="w-5 h-5 rounded-full" />
+                <img src={flags[i18n.language.split('-')[0]]} alt="Language Flag" className="w-5 h-5 rounded-full" />
                 <span
                   className={`${
                     Mode ? "text-black" : "text-white-person"
