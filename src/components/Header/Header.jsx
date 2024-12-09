@@ -10,6 +10,7 @@ import { BiMovie } from "react-icons/bi";
 import { TbTicket } from "react-icons/tb";
 import { FiSearch } from "react-icons/fi";
 import ru from "../../assets/RU.png";
+import uz from "../../assets/uzbek.webp"
 import { languages } from "../../static";
 import { useTranslation } from "react-i18next";
 
@@ -19,7 +20,7 @@ const Header = () => {
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   const [header, setHeader] = useState(false);
   const { t, i18n } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState("Ру");
+  const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem("i18nextLng" ) || "Uz");
   const handleLanguageChange = (lang) => {
     setSelectedLanguage(lang.label);
     i18n.changeLanguage(lang.code);
