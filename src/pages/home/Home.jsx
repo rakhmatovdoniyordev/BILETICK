@@ -7,7 +7,7 @@ const Home = () => {
     const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
     document.title = "BILETICK"
   return (
-    <section>
+    <section className={`${Mode ? "bg-white-person" : "bg-black"}`}>
       <Carousel/>
       <Week/>
     </section>
