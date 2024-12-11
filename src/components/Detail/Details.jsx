@@ -50,33 +50,53 @@ const MovieDetail = () => {
   // Malumot kelguncha Skeleton loading chiqishi
   if (isFetching) {
     return (
-      <section className="mt-[50px] px-4">
+      <section className={`pt-[50px] px-4 ${Mode ? "bg-white-person" : "bg-black"}`}>
         <div className="container mx-auto">
           <div>
             <Skeleton
               variant="rectangular"
-              width="100%"
-              height={700}
+              sx={{
+                bgcolor: Mode ? "grey.400" : "grey.300",
+                width: "  100%",
+                height: "700px",
+                aspectRatio: "1",
+                borderRadius: "4px",
+              }}
               className="rounded-lg md:w-1/3 mt-10"
             />
           </div>
           <div className="grid grid-cols-3 gap-5">
             <Skeleton
               variant="rectangular"
-              width={400}
-              height={200}
+              sx={{
+                bgcolor: Mode ? "grey.400" : "grey.300",
+                width: "100%",
+                height: "200px",
+                aspectRatio: "1",
+                borderRadius: "4px",
+              }}
               className="rounded-lg md:w-1/3 mt-10"
             />
             <Skeleton
               variant="rectangular"
-              width={400}
-              height={200}
+              sx={{
+                bgcolor: Mode ? "grey.400" : "grey.300",
+                width: "100%",
+                height: "200px",
+                aspectRatio: "2",
+                borderRadius: "4px",
+              }}
               className="rounded-lg md:w-1/3 mt-10"
             />
             <Skeleton
               variant="rectangular"
-              width={400}
-              height={200}
+              sx={{
+                bgcolor: Mode ? "grey.400" : "grey.300",
+                width: "100%",
+                height: "200px",
+                aspectRatio: "3",
+                borderRadius: "4px",
+              }}
               className="rounded-lg md:w-1/3 mt-10"
             />
           </div>
@@ -90,7 +110,7 @@ const MovieDetail = () => {
   }
 
   return (
-    <section className={` font-aeonik ${Mode ? "text-black" : "text-white"}`}>
+    <section className={` font-aeonik ${Mode ? "text-black bg-white-person" : "text-white bg-black"}`}>
       <div className="container">
         <div>
           <DetailsImages data={images} />
@@ -124,7 +144,7 @@ const MovieDetail = () => {
             ))}
           </div>
         </div>
-        <div className="my-10">
+        <div className="py-10">
           <div className="flex bg-[#111111] rounded-xl  max-w-[380px] max-[550px]:max-w-[250px] mx-auto">
             <button
               onClick={() => setActiveTab("tickets")}
@@ -296,7 +316,7 @@ const MovieDetail = () => {
                               }`}
                             >
                               {movie ? (
-                                <h2 className="font-aeonik text-[24px] font-medium">
+                                <h2 className="font-aeonik text-[24px] font-medium line-clamp-1 text-start" title={movie.original_title}>
                                   {movie.original_title}
                                 </h2>
                               ) : (

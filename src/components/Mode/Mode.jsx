@@ -9,7 +9,6 @@ const Mode = () => {
     const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
     const mode = () => {
         dispatch(toggleTheme())
-        document.body.style.background = Mode ? black :  white
     }
   return (
     <button

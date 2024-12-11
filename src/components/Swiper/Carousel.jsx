@@ -23,7 +23,7 @@ const Carousel = () => {
   const apiData = data?.results.slice(0, 6);
   return (
     <>
-      <div className="max-w-[1390px] mx-auto px-4 w-full">
+      <div className={`max-w-[1390px] mx-auto px-4 w-full ${Mode ? "bg-white-person" : "bg-black"}`}>
         <Swiper
           style={{
             "--swiper-navigation-color": "#f00",

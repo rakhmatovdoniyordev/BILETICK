@@ -1,0 +1,12 @@
+.scroll{
+    overflow: auto;
+}
+.scroll::-webkit-scrollbar{
+    height: 0;
+}
+
+@media (max-width: 650px){
+    .scroll::-webkit-scrollbar{
+        height: 3px;
+    }
+}

@@ -7,12 +7,12 @@ import { IoArrowUpCircle } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { MdKeyboardArrowDown, MdOutlineTheaterComedy } from "react-icons/md";
 import { BiMovie } from "react-icons/bi";
-import { TbTicket } from "react-icons/tb";
 import { FiSearch } from "react-icons/fi";
 import ru from "../../assets/RU.png";
 import uz from "../../assets/uzbek.webp"
 import { languages } from "../../static";
 import { useTranslation } from "react-i18next";
+import { BsBookmark } from "react-icons/bs";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ const Header = () => {
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
   console.log(Mode);
   const [header, setHeader] = useState(false);
-  const { i18n } = useTranslation();
+  const {t, i18n } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
 
   useEffect(() => {
@@ -114,7 +114,7 @@ const Header = () => {
                 className="flex justify-center"
               >
                 <p className="flex gap-1 items-center">
-                  <BiMovie className="w-6 h-6 " /> <span>Афиша</span>
+                  <BiMovie className="w-6 h-6 " /> <span>{t("header.poster")}</span>
                 </p>
               </NavLink>
             </li>
@@ -130,7 +130,7 @@ const Header = () => {
               >
                 <p className="flex gap-1 items-center">
                   <MdOutlineTheaterComedy className="w-6 h-6 " />{" "}
-                  <span>Сеансы</span>
+                  <span>{t("header.genre")}</span>
                 </p>
               </NavLink>
             </li>
@@ -145,7 +145,7 @@ const Header = () => {
                 className="flex justify-center"
               >
                 <p className="flex gap-1 items-center">
-                  <TbTicket className="w-6 h-6 " /> <span>Билеты</span>
+                  <BsBookmark className="w-6 h-6 " /> <span>{t("header.favourite")}</span>
                 </p>
               </NavLink>
             </li>
@@ -160,14 +160,14 @@ const Header = () => {
                 className="flex justify-center"
               >
                 <p className="flex gap-1 items-center">
-                  <FiSearch className="w-6 h-6 " /> <span>Поиск</span>
+                  <FiSearch className="w-6 h-6 " /> <span>{t("header.search")}</span>
                 </p>
               </NavLink>
             </li>
           </ul>
           <div className="pb-8 mt-8">
             <button className="bg-red-person text-white-person px-7 py-2 rounded-lg ">
-              Войти
+              {t("header.button")}
             </button>
           </div>
           <div className="flex justify-center pb-10 h-14 z-50 mx-auto relative">

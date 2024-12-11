@@ -32,7 +32,7 @@ const Week = () => {
   const type = "top_rated"
   const {data, isFetching} = useGetMovieQuery({type/* , params: {page} */, without_genres: "10749,18"})
   return (
-    <section className="mt-[50px]">
+    <section className={`pt-[50px] ${Mode ? "bg-white-person" : "bg-black"}`}>
       <div className="container">
         <div className="flex justify-between items-center mb-5">
           <p
@@ -117,7 +117,7 @@ const Week = () => {
                     }`}
                   >
                     {movie ?
-                    <h2 className="font-aeonik text-[24px] font-medium text-left">
+                    <h2 className="font-aeonik text-[24px] font-medium text-left line-clamp-1" title={movie.original_title}>
                       {movie.original_title}
                     </h2>
                     :

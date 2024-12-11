@@ -8,6 +8,7 @@ import { useGetMovieDiscoverQuery } from "../../redux/api/movie-api";
 import not from "../../assets/not.jpg";
 import Card from "../../components/Card/Card";
 import { useTranslation } from "react-i18next";
+import "./Session.css"
 
 const Session = () => {
   const {t} = useTranslation()
@@ -80,9 +81,9 @@ const Session = () => {
     window.scrollTo(0,0)
   }, [])
   return (
-    <section>
+    <section className={`${Mode ? "bg-white-person" : "bg-black"}`}>
       <div className="container">
-        <div className="scrollbar scrollbar-thumb-rounded-full scrollbar-track-rounded-full overflow-y-auto scrollbar-thumb-red-500 scrollbar-track-slate-300 scrollbar-h-1">
+        <div className="scroll">
           <div className="flex items-center gap-3 whitespace-nowrap px-5 mb-5">
             {genreButtons.map((item, index) =>
               item ? (
@@ -116,7 +117,7 @@ const Session = () => {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-5 mt-14 max-[990px]:grid-cols-3 max-[720px]:grid-cols-2 max-[550px]:grid-cols-1">
+        <div className="grid grid-cols-4 gap-5 mt-3 max-[990px]:grid-cols-3 max-[720px]:grid-cols-2 max-[550px]:grid-cols-1">
           <Card data={movies}/>
         </div>
         <div className="flex justify-center mt-7 select-none">

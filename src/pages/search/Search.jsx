@@ -48,7 +48,7 @@ const Search = () => {
     return data?.results || [];
   }, [data, isFetching]);
   return (
-    <section className="mt-12">
+    <section className={`pt-12 ${Mode ? "bg-white-person" : "bg-black"}`}>
       <div className="container">
         <div className="w-full flex justify-center items-center">
           <form action="" className="flex relative w-[380px]" onSubmit={handleSubmit}>

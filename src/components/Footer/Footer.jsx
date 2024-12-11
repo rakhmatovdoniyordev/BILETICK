@@ -23,121 +23,123 @@ const Footer = () => {
   const {t} = useTranslation()
   const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
   return (
-    <div className="container">
-      <footer className={`${Mode ? "bg-[#cfcfcf]" : "bg-[#111111]" } text-white p-8 rounded-lg mb-10 mt-[120px] max-[1100px]:mt-[95px] max-[990px]:mt-[80px] max-[660px]:mt-[50px] max-[450px]:mt-[40px] font-aeonik`}>
-          <div className="grid grid-cols-4 max-[990px]:grid-cols-2 max-[510px]:grid-cols-1 max-[550px]: gap-8">
-            <div className="flex flex-col justify-between max-[510px]:items-center">
-              <div className="mb-4">
-                <img src={logo} alt="" />
-              </div>
-              <div className="space-y-2 flex flex-col">
-                <a href="#">
-                  <img src={google} alt="" />
-                </a>
-                <a href="#">
-                  <img src={app} alt="" />
-                </a>
-              </div>
-            </div>
-            <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
-              <h3 className="text-lg font-semibold mb-4">{t("footer.about")}</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
-                    <IoNewspaperOutline className="text-[24px] text-red-person"/>
-                    {t("footer.public")}
+    <footer className={`${Mode ? "bg-white-person" : "bg-black"} pb-10 pt-[120px] max-[1100px]:pt-[95px] max-[990px]:pt-[80px] max-[660px]:pt-[50px] max-[450px]:pt-[40px]`}>
+      <div className={`container`}>
+        <div className={`${Mode ? "bg-[#cfcfcf]" : "bg-[#111111]" } text-white p-8 rounded-lg font-aeonik`}>
+            <div className="grid grid-cols-4 max-[990px]:grid-cols-2 max-[510px]:grid-cols-1 max-[550px]: gap-8">
+              <div className="flex flex-col justify-between max-[510px]:items-center">
+                <div className="mb-4">
+                  <img src={logo} alt="" />
+                </div>
+                <div className="space-y-2 flex flex-col">
+                  <a href="#">
+                    <img src={google} alt="" />
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className=" hover:text-red-500 transition flex items-center gap-1"
-                  >
-                    <BsStars className="text-[24px] text-red-person"/>
-                    {t("footer.advertising")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
-                    <FaRegQuestionCircle className="text-[24px] text-red-person"/>
-                    {t("footer.faq")}
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
-                    <BsTelephone className="text-[24px] text-red-person"/>
-                    {t("footer.contact")}
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
-              <h3 className="text-lg font-semibold mb-4">{t("footer.category")}</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center space-x-2 hover:text-red-600 transition"
-                  >
-                    <BiCameraMovie className="text-[24px] text-red-person"/>
-                    <span>{t("footer.movie")}</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center space-x-2 hover:text-red-600 transition"
-                  >
-                    <MdTheaterComedy className="text-[24px] text-red-person"/>
-                    <span>{t("footer.theater")}</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center space-x-2 hover:text-red-600 transition"
-                  >
-                    <GiMicrophone className="text-[24px] text-red-person"/>
-                    <span>{t("footer.concerts")}</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center space-x-2 hover:text-red-600 transition"
-                  >
-                    <MdOutlineSportsBasketball  className="text-[24px] text-red-person"/>
-                    <span>{t("footer.sport")}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
-              <h3 className="text-lg font-semibold mb-4">{t("footer.contactus")}</h3>
-              <a
-                href="tel:+998958973338"
-                className="text-red-600 text-xl font-semibold hover:text-red-500 transition"
-              >
-                +998 (95) 897-33-38
-              </a>
-              <div className="mt-8">
-                <h4 className="text-lg font-semibold mb-4">{t("footer.social")}</h4>
-                <div className="flex space-x-4">
-                  <a href="#" className="text-red-600 transition">
-                    <FaInstagram className="text-2xl" />
-                  </a>
-                  <a href="#" className="text-red-600 transition">
-                    <FaFacebookF className="text-2xl" />
-                  </a>
-                  <a href="#" className="text-red-600 transition">
-                    <FaYoutube className="text-2xl" />
+                  <a href="#">
+                    <img src={app} alt="" />
                   </a>
                 </div>
               </div>
+              <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
+                <h3 className="text-lg font-semibold mb-4">{t("footer.about")}</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
+                      <IoNewspaperOutline className="text-[24px] text-red-person"/>
+                      {t("footer.public")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className=" hover:text-red-500 transition flex items-center gap-1"
+                    >
+                      <BsStars className="text-[24px] text-red-person"/>
+                      {t("footer.advertising")}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
+                      <FaRegQuestionCircle className="text-[24px] text-red-person"/>
+                      {t("footer.faq")}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-red-600 transition flex items-center gap-1">
+                      <BsTelephone className="text-[24px] text-red-person"/>
+                      {t("footer.contact")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
+                <h3 className="text-lg font-semibold mb-4">{t("footer.category")}</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center space-x-2 hover:text-red-600 transition"
+                    >
+                      <BiCameraMovie className="text-[24px] text-red-person"/>
+                      <span>{t("footer.movie")}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center space-x-2 hover:text-red-600 transition"
+                    >
+                      <MdTheaterComedy className="text-[24px] text-red-person"/>
+                      <span>{t("footer.theater")}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center space-x-2 hover:text-red-600 transition"
+                    >
+                      <GiMicrophone className="text-[24px] text-red-person"/>
+                      <span>{t("footer.concerts")}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="flex items-center space-x-2 hover:text-red-600 transition"
+                    >
+                      <MdOutlineSportsBasketball  className="text-[24px] text-red-person"/>
+                      <span>{t("footer.sport")}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className={`${Mode ? "text-black" : "text-white-person"} max-[510px]:flex max-[510px]:flex-col max-[510px]:justify-center max-[510px]:items-center`}>
+                <h3 className="text-lg font-semibold mb-4">{t("footer.contactus")}</h3>
+                <a
+                  href="tel:+998958973338"
+                  className="text-red-600 text-xl font-semibold hover:text-red-500 transition"
+                >
+                  +998 (95) 897-33-38
+                </a>
+                <div className="mt-8">
+                  <h4 className="text-lg font-semibold mb-4">{t("footer.social")}</h4>
+                  <div className="flex space-x-4">
+                    <a href="#" className="text-red-600 transition">
+                      <FaInstagram className="text-2xl" />
+                    </a>
+                    <a href="#" className="text-red-600 transition">
+                      <FaFacebookF className="text-2xl" />
+                    </a>
+                    <a href="#" className="text-red-600 transition">
+                      <FaYoutube className="text-2xl" />
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-      </footer>
-    </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

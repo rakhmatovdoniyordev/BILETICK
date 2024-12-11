@@ -9,7 +9,6 @@ import Search from '../pages/search/Search'
 import Session from '../pages/sessions/Session'
 
 const Router = () => {
-  const Mode = useSelector((state) =>  state.isDarkMode.isDarkMode);
   return (
     <div>
       <Routes>

@@ -20,7 +20,7 @@ const Card = ({ data }) => {
         <div key={index}>
           <div className="w-full mb-3 relative">
             <div
-              className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer"
+              className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer max-[550px]:right-20 max-[450px]:right-16 max-[400px]:right-14 max-[350px]:right-12"
               onClick={() => handleFavourite(movie)}
                   >
               {isInFavoutite(movie?.id) ? (
@@ -68,7 +68,7 @@ const Card = ({ data }) => {
             }`}
           >
             {movie ? (
-              <h2 className="font-aeonik text-[24px] font-medium max-[650px]:text-[20px] max-[550px]:text-[18px]">
+              <h2 className="font-aeonik text-[24px] font-medium max-[650px]:text-[20px] max-[550px]:text-[18px] text-start line-clamp-1" title={movie.original_title}>
                 {movie.original_title}
               </h2>
             ) : (

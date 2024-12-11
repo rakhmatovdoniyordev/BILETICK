@@ -6,6 +6,9 @@ const StyledPagination = styled(Pagination)(({ theme, isDarkMode }) => ({
   '& .MuiPaginationItem-root': {
     color: isDarkMode ? '#000000' : '#ffffff',
     borderColor: isDarkMode ? 'rgba(255, 0, 0, 0.4)' : 'rgba(255, 255, 255, 1)',
+    height: "40px",
+    paddingLeft: "0px",
+    paddingRight: "0px",
     '&:hover': {
       backgroundColor: isDarkMode ? 'rgba(198, 31, 31, 0.4)' : 'rgba(255, 255, 255, 0.4)',
     },

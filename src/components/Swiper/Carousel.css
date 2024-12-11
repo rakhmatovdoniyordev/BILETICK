@@ -88,3 +88,26 @@
 .swiper-button-prev {
   left: 10px;
 }
+
+@media (max-width: 800px) {
+  .swiper-button-next,
+.swiper-button-prev{
+  width: 40px;
+  height: 40px;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after{
+  font-size: 16px;
+}
+}
+@media (max-width: 500px) {
+.swiper-button-next,
+.swiper-button-prev{
+  width: 35px;
+  height:35px;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after{
+  font-size: 14px;
+}
+}

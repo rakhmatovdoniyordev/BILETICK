@@ -18,9 +18,9 @@ const Favourite = () => {
   const navigate = useNavigate()
   document.title = "BILETICK | Saved"
   return (
-    <section>
+    <section className={`${Mode ? "bg-white-person" : "bg-black"}`}>
       <div className="container">
-        <div className="grid grid-cols-4 gap-5 mt-14 max-[990px]:grid-cols-3 max-[720px]:grid-cols-2 max-[550px]:grid-cols-1">
+        <div className="grid grid-cols-4 gap-5 pt-14 max-[990px]:grid-cols-3 max-[720px]:grid-cols-2 max-[550px]:grid-cols-1">
             {
                 favouriteItem?.map((movie) => (
                   <div key={movie?.id}>
