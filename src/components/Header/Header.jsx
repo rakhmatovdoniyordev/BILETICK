@@ -141,7 +141,7 @@ const Header = () => {
             >
               <NavLink
                 onClick={handleMenuToggle}
-                to={"/search"}
+                to={"/favourite"}
                 className="flex justify-center"
               >
                 <p className="flex gap-1 items-center">
