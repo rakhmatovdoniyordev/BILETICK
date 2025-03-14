@@ -78,9 +78,9 @@ const Week = () => {
             className="mySwiper2"
           >
             {
-              (isFetching ? Array.from(new Array(4)) : data?.results)?.map((movie) => (
-              <SwiperSlide key={movie?.id}>
-                <div key={movie?.id}>
+              (isFetching ? Array.from(new Array(4)) : data?.results)?.map((movie, index) => (
+              <SwiperSlide key={movie?.id || `placeholder-${index}`}>
+                <div>
                   <div className={`w-full mb-3 relative`}>
                     <div
                       className="w-10 h-10 bg-red-person flex justify-center items-center rounded-full absolute right-2 top-2 cursor-pointer"

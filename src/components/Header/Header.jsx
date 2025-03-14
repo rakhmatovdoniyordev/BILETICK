@@ -18,7 +18,6 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState(false);
   const Mode = useSelector((state) => state.isDarkMode.isDarkMode);
-  console.log(Mode);
   const [header, setHeader] = useState(false);
   const {t, i18n } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
@@ -165,11 +164,6 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
-          <div className="pb-8 mt-8">
-            <button className="bg-red-person text-white-person px-7 py-2 rounded-lg ">
-              {t("header.button")}
-            </button>
-          </div>
           <div className="flex justify-center pb-10 h-14 z-50 mx-auto relative">
           <button
                 onClick={handleLanguageToggle}
